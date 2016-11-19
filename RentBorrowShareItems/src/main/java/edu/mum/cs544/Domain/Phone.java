@@ -17,10 +17,10 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Tamrat
+ * @author 
  */
 @Entity
-@Table(name = "phone", catalog = "concise_pos")
+@Table(name = "phone", catalog = "cs544db")
 public class Phone implements Serializable {
 
 	private static final long serialVersionUID = 1L;

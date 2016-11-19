@@ -24,24 +24,24 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource dataSource;
 
-	@Autowired
-	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-
-	  auth.jdbcAuthentication().dataSource(dataSource)
-		.usersByUsernameQuery(
-				"select username as username, password as password, enabled as enabled from users where username=?")
-		.authoritiesByUsernameQuery(
-				"select username as username, role as role from users where username=?");
-	}
+//	@Autowired
+//	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+//
+//	  auth.jdbcAuthentication().dataSource(dataSource)
+//		.usersByUsernameQuery(
+//				"select username as username, password as password, enabled as enabled from users where username=?")
+//		.authoritiesByUsernameQuery(
+//				"select username as username, role as role from users where username=?");
+//	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/","/login/**","/user/verify/**").permitAll()
-		.antMatchers("/admin/**").hasRole("ADMIN").antMatchers("/user/**")
-				.hasAnyRole("USER, ADMIN").antMatchers("/login")
-				.permitAll().antMatchers("/resources/**","/login/signup").permitAll()
-				.anyRequest().authenticated().and().formLogin().loginPage("/login")
-				.successForwardUrl("/login/handleLogin").permitAll().and().logout().permitAll().and().sessionManagement().invalidSessionUrl("/login");
+		http.authorizeRequests().antMatchers("/","/login","/user/verify/**").permitAll();
+//		.antMatchers("/admin/**").hasRole("ADMIN").antMatchers("/user/**")
+//				.hasAnyRole("USER, ADMIN").antMatchers("/login")
+//				.permitAll().antMatchers("/resources/**","/login/signup").permitAll()
+//				.anyRequest().authenticated().and().formLogin().loginPage("/login")
+//				.successForwardUrl("/login/handleLogin").permitAll().and().logout().permitAll().and().sessionManagement().invalidSessionUrl("/login");
 	}
 
 
